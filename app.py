@@ -28,8 +28,8 @@ def process_line(line, date_str, counter):
         # Siempre reducir el código a los últimos dos dígitos
         converted_code = str(int(original_code))[-2:]
 
-        settlement_method = 'RTGS' if record_type == 'IE' or record_type == 'IR' else 'BATCH_SETTLEMENT'
-        instruction_type = 'DELIVER' if record_type in ['IE', 'IR'] else 'RECEIVE' if record_type == 'IR' else 'UNKNOWN'
+        settlement_method = 'RTGS' if record_type in ['IE', 'IR'] else 'BATCH_SETTLEMENT'
+        instruction_type = 'DELIVER' if record_type == 'IE' else 'RECEIVE' if record_type == 'IR' else 'UNKNOWN'
 
         # Excepción SOLO para securities_account
         if record_type == 'DE' and original_code == '7046' and account_number == '10000':
