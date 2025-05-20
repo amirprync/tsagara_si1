@@ -100,7 +100,7 @@ def convert_file(content):
     return header + '\n' + '\n'.join(output_lines)
 
 def main():
-    st.title("Conversor de Archivos TSA a SI2")
+    st.title("Conversor de Archivos TSA GARA a SI1")
     
     uploaded_file = st.file_uploader("Seleccioná el archivo TXT", type=['txt'])
     
