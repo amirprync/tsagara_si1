@@ -29,7 +29,7 @@ def process_line(line, date_str, counter):
         converted_code = str(int(original_code))[-2:]
 
         settlement_method = 'RTGS' if record_type == 'IE' or record_type == 'IR' else 'BATCH_SETTLEMENT'
-        instruction_type = 'DELIVER' if record_type == 'IE' else 'RECEIVE' if record_type == 'IR' else 'UNKNOWN'
+        instruction_type = 'DELIVER' if record_type in ['IE', 'IR'] else 'RECEIVE' if record_type == 'IR' else 'UNKNOWN'
 
         # Excepción SOLO para securities_account
         if record_type == 'DE' and original_code == '7046' and account_number == '10000':
@@ -37,8 +37,8 @@ def process_line(line, date_str, counter):
         else:
             securities_account = f"7{converted_code}/{account_number}" if record_type == 'DE' else f"{converted_code}/{account_number}"
 
-        # Excepción especial para IE + código 46
-        if record_type == 'IE' and converted_code == '46':
+        # Excepción especial para IE o IR + código 46
+        if record_type in ['IE', 'IR'] and converted_code == '46':
             settlement_counterparty = '309'
             securities_account_counterparty = f"9046/{counterparty_account}"
         else:
